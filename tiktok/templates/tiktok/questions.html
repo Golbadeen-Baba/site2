@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Model Questionnaire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/tik_question.css' %}">
+</head>
+<body>
+
+<div class="form-wrapper">
+  <div id="progressBarContainer">
+    <div id="progressBar"></div>
+  </div>
+  <form id="multiStepForm" method="post">
+    {% csrf_token %}
+    <!-- Step 1 -->
+    <div class="step active">
+      <label>1: What is your tiktok username?</label>
+      {{ form.username }}
+
+      <label>2: What kind of videos do you usually post?</label>
+      {{ form.video_types }}
+
+      <label>3: How many followers do you have?</label>
+      {{ form.followers_count }}
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <label>4: Do your videos usually get a lot of likes and comments?</label>
+      {{ form.gets_engagement }}
+
+      <label>5: How would you like to receive money? (Like, bank transfer, e-wallet, etc.)</label>
+      {{ form.preferred_payment_method }}
+
+      <label>6: Which currency would you like to receive money in?</label>
+      {{ form.preferred_currency }}
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <h5>Bank Account Details (for direct bank transfers)</h5>
+      <label>Full Name on Your Bank Account (as per ID card/official identification)</label>
+      {{ form.bank_account_name }}
+      
+      <label>Your Bank Name?</label>
+      {{ form.bank_name }}
+
+      <label>Your Bank Account Number?</label>
+      {{ form.bank_account_number }}
+
+      <label>Your Bank Branch</label>
+      {{ form.bank_branch }}
+
+      <label>Contact number</label>
+      {{ form.contact_number }}
+
+      <label>Email</label>
+      {{ form.email }}
+
+      <label>Do you have a Taxpayer Identification Number (NPWP)? If yes, please provide.</label>
+      {{ form.taxpayer_id }}
+
+    </div>
+
+    <div style="text-align: center;">
+      <button type="button" id="backBtn" style="display:none;">Back</button>
+      <button type="button" id="nextBtn">Next</button>
+      <button type="submit" id="submitBtn" style="display:none;">Submit</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const steps = document.querySelectorAll('.step');
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const progressBar = document.getElementById('progressBar');
+
+  let currentStep = 0;
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle('active', i === index);
+    });
+
+    progressBar.style.width = `${((index + 1) / steps.length) * 100}%`;
+
+    backBtn.style.display = index === 0 ? 'none' : 'inline-block';
+    nextBtn.style.display = index === steps.length - 1 ? 'none' : 'inline-block';
+    submitBtn.style.display = index === steps.length - 1 ? 'inline-block' : 'none';
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+
+  document.getElementById('multiStepForm').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') e.preventDefault();
+  });
+
+  showStep(currentStep);
+</script>
+</body>
+</html>

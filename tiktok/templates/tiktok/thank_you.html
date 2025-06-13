@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      padding: 2rem;
+    }
+
+    .thank-you-card {
+      background-color: white;
+      padding: 3rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .thank-you-card h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .thank-you-card p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      color: #555;
+    }
+
+    .thank-you-card a {
+      display: inline-block;
+      text-decoration: none;
+      background: #e1306c;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .thank-you-card a:hover {
+      background: #c72b60;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .thank-you-card {
+        padding: 2rem 1.5rem;
+      }
+
+      .thank-you-card h1 {
+        font-size: 1.5rem;
+      }
+
+      .thank-you-card p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-card">
+    <h1>🎉 Thank You!</h1>
+    <p>Your submission has been received successfully. We’ll be in touch soon!</p>
+    <a href="https://www.instagram.com/accounts/login/" target="_blank">Go to Instagram</a>
+  </div>
+</body>
+</html>

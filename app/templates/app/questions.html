@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Model Questionnaire</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/questions.css' %}">
+</head>
+<body>
+
+<div class="form-wrapper">
+  <div id="progressBarContainer">
+    <div id="progressBar"></div>
+  </div>
+  <form id="multiStepForm" method="post">
+    {% csrf_token %}
+    <!-- Step 1 -->
+    <div class="step active">
+      <label>1: What's your primary modeling niche (e.g., fashion, commercial, editorial, fitness)?</label>
+      <input type="text" name="q1" required>
+
+      <label>2: How do you typically prepare for a photoshoot in the days leading up to it?</label>
+      <input type="text" name="q2" required>
+
+      <label>3: Are you comfortable with a variety of styling directions, including traditional Pakistani attire?</label>
+      <input type="text" name="q3" required>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step">
+      <label>4: Do you have any creative concepts or themes you'd love to explore in shoot?</label>
+      <input type="text" name="q4">
+
+      <label>5: What's your preferred time frame for a full shoot, and do you require breaks for touch-ups or outfit changes?</label>
+      <input type="text" name="q5">
+
+      <label>6: Are you open to shoots in diverse locations across Pakistan, Historical sites or landscapes?</label>
+      <input type="text" name="q6">
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step">
+      <label>7: What are your usual rates for a full-day or half-day professional shoot?</label>
+      <input type="text" name="q7">
+    </div>
+
+    <div style="text-align: center;">
+      <button type="button" id="backBtn" style="display:none;">Back</button>
+      <button type="button" id="nextBtn">Next</button>
+      <button type="submit" id="submitBtn" style="display:none;">Submit</button>
+      <button type="button" id="just-check" style="display:none;">just to check</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  const steps = document.querySelectorAll('.step');
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+  const submitBtn = document.getElementById('submitBtn');
+  const justCheckBtn = document.getElementById('just-check');
+  const progressBar = document.getElementById('progressBar');
+
+  let currentStep = 0;
+
+  function showStep(index) {
+    steps.forEach((step, i) => {
+      step.classList.toggle('active', i === index);
+    });
+
+    progressBar.style.width = `${((index + 1) / steps.length) * 100}%`;
+
+    backBtn.style.display = index === 0 ? 'none' : 'inline-block';
+    nextBtn.style.display = index === steps.length - 1 ? 'none' : 'inline-block';
+    submitBtn.style.display = index === steps.length - 1 ? 'inline-block' : 'none';
+    justCheckBtn.style.display = index === steps.length - 1 ? 'inline-block' : 'none';
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      showStep(currentStep);
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (currentStep > 0) {
+      currentStep--;
+      showStep(currentStep);
+    }
+  });
+
+  document.getElementById('multiStepForm').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') e.preventDefault();
+  });
+
+  showStep(currentStep);
+</script>
+
+</body>
+</html>

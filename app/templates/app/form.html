@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="form-container">
+         <form method="post">
+              {% csrf_token %}
+              <div class="logo">
+                  <img src="{% static 'images/logo.png' %}" alt="Logo">
+              </div>
+          {{ form.name }}
+          {{ form.email }}
+          {{ form.phone_number }}
+          {{ form.date_of_birth }}
+          {{ form.instagram_handle }}
+          <button type="submit">Submit</button>
+
+
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <strong>Error:</strong>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                        <strong>Success:</strong>
+                    {% endif %}
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>

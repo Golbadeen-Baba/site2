@@ -1,0 +1,143 @@
+:root {
+--primary: #fcb69f;
+--secondary: #ffecd2;
+--accent: #e1306c;
+--text-dark: #333;
+--text-light: #fff;
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background: linear-gradient(to right, var(--secondary), var(--primary));
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+padding: 1rem;
+}
+
+.form-wrapper {
+background: white;
+max-width: 500px;
+width: 100%;
+border-radius: 20px;
+padding: 2rem;
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+animation: fadeIn 0.8s ease-in-out;
+}
+
+.form-wrapper h2 {
+text-align: center;
+color: var(--text-dark);
+margin-bottom: 1.5rem;
+}
+
+.step {
+display: none;
+}
+
+.step.active {
+display: block;
+}
+
+label {
+font-weight: bold;
+color: var(--text-dark);
+font-size: 0.95rem;
+display: block;
+margin-top: 1rem;
+margin-bottom: 0.25rem;
+text-align: left;
+}
+
+input[type="text"] {
+width: 100%;
+padding: 10px;
+margin-bottom: 1rem;
+border: 2px solid #ddd;
+border-radius: 15px;
+font-size: 1rem;
+transition: border 0.3s ease;
+}
+
+input[type="text"]:focus {
+border-color: var(--accent);
+outline: none;
+}
+
+button {
+padding: 10px 20px;
+border-radius: 20px;
+border: none;
+background: var(--accent);
+color: white;
+font-weight: bold;
+cursor: pointer;
+margin-top: 1rem;
+transition: background 0.3s ease;
+}
+
+button:hover {
+background: #c72b60;
+}
+
+button:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+}
+
+.logo img {
+width: 50px;
+margin-bottom: 20px;
+}
+
+#progressBarContainer {
+width: 100%;
+background: #eee;
+height: 8px;
+border-radius: 5px;
+margin-bottom: 20px;
+overflow: hidden;
+}
+
+#progressBar {
+height: 100%;
+background: var(--accent);
+width: 0%;
+transition: width 0.4s ease;
+}
+
+@keyframes fadeIn {
+from {
+opacity: 0;
+transform: translateY(10px);
+}
+to {
+opacity: 1;
+transform: translateY(0);
+}
+}
+
+@media (max-width: 600px) {
+.form-wrapper {
+padding: 1.5rem 1rem;
+}
+
+label {
+font-size: 0.9rem;
+}
+
+input[type="text"] {
+font-size: 0.95rem;
+}
+
+button {
+width: 100%;
+}
+}
