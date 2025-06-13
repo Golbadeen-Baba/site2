@@ -26,7 +26,7 @@ SECRET_KEY = config('KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['copy.quotex.network', 'www.copy.quotex.network']
 
 
 # Application definition
